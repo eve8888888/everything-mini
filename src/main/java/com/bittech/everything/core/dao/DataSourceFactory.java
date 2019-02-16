@@ -44,14 +44,14 @@ public class DataSourceFactory {
     public static void initDatabase() {
         Connection conn;
         try {
-            try(InputStream in = DataSourceFactory.class
+            try (InputStream in = DataSourceFactory.class
                     .getClassLoader().getResourceAsStream("everything_mini.sql")) {
-                if(in == null){
+                if (in == null) {
                     throw new RuntimeException("Not read init database script please check it");
                 }
                 StringBuilder sb = new StringBuilder();
                 String line;
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(in))){
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
                     while ((line = br.readLine()) != null) {
                         sb.append(line);
                     }
@@ -60,11 +60,10 @@ public class DataSourceFactory {
                 conn = dataSource().getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
                 pst.execute();
-                System.out.println("************** 创建表");
                 conn.close();
                 pst.close();
 
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } catch (Exception e) {

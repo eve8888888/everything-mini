@@ -16,33 +16,34 @@ public class FileScanImpl implements FileScan {
 
     EverythingMiniConfig config = EverythingMiniConfig.getInstance();
     private LinkedList<FileInterceptor> interceptors = new LinkedList<>();
+
     @Override
     public void index(String path) {
         File file = new File(path);
-        if(file.isFile()){
-            if(config.getExcludePath().contains(file.getPath())){
+        if (file.isFile()) {
+            if (config.getExcludePath().contains(file.getPath())) {
                 return;
             }
-        }else {
-            if(config.getExcludePath().contains(path)){
+        } else {
+            if (config.getExcludePath().contains(path)) {
                 return;
-            }else {
+            } else {
                 File[] files = file.listFiles();
-                if(files != null){
+                if (files != null) {
                     for (File f :
                             files) {
                         index(f.getAbsolutePath());
                     }
                 }
             }
-
         }
-        for (FileInterceptor interceptor : this.interceptors){
+        for (FileInterceptor interceptor : this.interceptors) {
             interceptor.apply(file);
         }
     }
+
     @Override
-    public void interceptor(FileInterceptor interceptor){
+    public void interceptor(FileInterceptor interceptor) {
         this.interceptors.add(interceptor);
     }
 

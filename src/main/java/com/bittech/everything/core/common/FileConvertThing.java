@@ -23,10 +23,11 @@ public final class FileConvertThing {
 
     /**
      * 将File对象转换成Thing对象
+     *
      * @param file
-     * @return
+     * @return thing
      */
-    public static Thing convert(File file){
+    public static Thing convert(File file) {
         Thing thing = new Thing();
         thing.setName(file.getName());
         thing.setPath(file.getPath());
@@ -37,30 +38,32 @@ public final class FileConvertThing {
 
     /**
      * 计算文件深度
+     *
      * @param file
      * @return dept
      */
-    private static int computerFileDepth(File file){
+    private static int computerFileDepth(File file) {
         String[] segments = file.getAbsolutePath().split("\\\\");
         return segments.length;
     }
 
     /**
      * 根据文件名获取文件类型
+     *
      * @param file
      * @return
      */
-    private static FileType computerFileType(File file){
-        if(file.isDirectory()){
+    private static FileType computerFileType(File file) {
+        if (file.isDirectory()) {
             return FileType.OTHER;
         }
         String fileName = file.getName();
         int index = fileName.lastIndexOf(".");
-        if(index != -1 && index < fileName.length() - 1){
+        if (index != -1 && index < fileName.length() - 1) {
             String extend = fileName.substring(index + 1);
             return FileType.lookup(extend);
-        }else {
-         return FileType.OTHER;
+        } else {
+            return FileType.OTHER;
         }
     }
 }

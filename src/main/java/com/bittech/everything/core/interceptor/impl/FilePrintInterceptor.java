@@ -2,7 +2,7 @@ package com.bittech.everything.core.interceptor.impl;
 
 import com.bittech.everything.core.interceptor.FileInterceptor;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * @Author: Eve

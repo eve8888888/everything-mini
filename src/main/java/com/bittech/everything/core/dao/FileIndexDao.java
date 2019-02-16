@@ -19,4 +19,10 @@ public interface FileIndexDao {
      * @param thing
      */
     void insert(Thing thing);
+
+    /**
+     * 删除数据thing
+     * @param thing
+     */
+    void delete(Thing thing);
 }
